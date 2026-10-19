@@ -1,0 +1,15 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: visual-inspector:0.1.0
+    container_name: visual-inspector-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./artifacts:/app/artifacts:ro
+    environment:
+      - ARTIFACTS_DIR=/app/artifacts
+      - CORS_ORIGINS=*
+    restart: unless-stopped

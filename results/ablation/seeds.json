@@ -1,0 +1,50 @@
+{
+  "seeds": [
+    42,
+    123,
+    999
+  ],
+  "image_auroc": {
+    "mean": 1.0,
+    "std": 0.0,
+    "values": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "pixel_auroc": {
+    "mean": 0.8794,
+    "std": 0.0178,
+    "values": [
+      0.881,
+      0.9003,
+      0.8568
+    ]
+  },
+  "au_pro": {
+    "mean": 0.5194,
+    "std": 0.0278,
+    "values": [
+      0.5534,
+      0.5197,
+      0.4852
+    ]
+  },
+  "env": {
+    "python_version": "3.12.15",
+    "torch_version": "2.14.1+cpu",
+    "torchvision_version": "0.29.1+cpu",
+    "os": "Windows 11 (AMD64)",
+    "cpu_model": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+    "cpu_threads": 12,
+    "torch_num_threads": 6,
+    "device": "cpu",
+    "cuda_available": false,
+    "cuda_version": null,
+    "cuda_device_name": null,
+    "faiss_available": true,
+    "git_commit": "a17c5a6ac65df75bb4a8340c6f3c5b4dc93b816d"
+  },
+  "timestamp": "2026-10-19T09:08:17.309946+00:00"
+}

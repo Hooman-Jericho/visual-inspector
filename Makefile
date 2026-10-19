@@ -19,7 +19,7 @@ test:
 	@echo "✓ tests passed"
 
 smoke:
-	$(UV) run visual-inspector fit --config configs/smoke.yaml
+	$(UV) run visual-inspector evaluate --config configs/smoke.yaml --profile smoke --max-train 50
 	@echo "✓ smoke test passed"
 
 eval:
@@ -31,8 +31,12 @@ bench:
 	@echo "✓ benchmark complete"
 
 report:
-	$(UV) run visual-inspector report
+	$(PYTHON) scripts/make_report.py
 	@echo "✓ report generated"
+
+train-demo:
+	$(PYTHON) scripts/train_demo.py
+	@echo "✓ demo models trained into artifacts/"
 
 serve:
 	$(UV) run uvicorn visual_inspector.serve.app:app --reload --port 8000
@@ -41,8 +45,9 @@ docker:
 	docker build -t visual-inspector .
 	@echo "✓ docker build complete"
 
-verify: lint test
-	@echo "✓ all checks passed"
+verify: smoke
+	$(PYTHON) scripts/check_readme_numbers.py
+	@echo "✓ verification passed: smoke eval succeeded and README numbers match results/"
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true

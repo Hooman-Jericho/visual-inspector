@@ -38,20 +38,54 @@ def fit(
 
 @app.command()
 def evaluate(
-    config: str = typer.Option("configs/default.yaml", help="Path to config YAML"),
+    config: str = typer.Option("configs/smoke.yaml", help="Path to config YAML"),
+    profile: str = typer.Option("smoke", help="Profile to evaluate: smoke, default, full"),
+    category: str | None = typer.Option(None, help="Category name (optional)"),
+    max_train: int | None = typer.Option(None, help="Max train images"),
+    synthetic: bool = typer.Option(False, "--synthetic", help="Force synthetic dataset"),
 ) -> None:
-    """Evaluate fitted model on test data. (Stage B)"""
-    typer.echo("Evaluate command — to be implemented in Stage B.")
-    raise typer.Exit(code=0)
+    """Evaluate PatchCore on test data."""
+    from visual_inspector.eval.evaluate import run_evaluation
+
+    results = run_evaluation(
+        config_path=config,
+        profile=profile,
+        category=category,
+        max_train=max_train,
+        use_synthetic=synthetic,
+    )
+    for res in results:
+        m = res["metrics"]
+        p_str = f"{m['pixel_auroc']:.4f}" if m["pixel_auroc"] is not None else "N/A"
+        pro_str = f"{m['au_pro']:.4f}" if m["au_pro"] is not None else "N/A"
+        typer.echo(
+            f"[{res['category']:12s}] Image AUROC: {m['image_auroc']:.4f} | "
+            f"Pixel AUROC: {p_str} | AU-PRO: {pro_str}"
+        )
 
 
 @app.command()
 def benchmark(
-    config: str = typer.Option("configs/default.yaml", help="Path to config YAML"),
+    config: str = typer.Option("configs/smoke.yaml", help="Path to config YAML"),
+    output: str = typer.Option("results/latency.json", help="Output path for latency JSON"),
+    warmup: int = typer.Option(10, help="Warmup iterations"),
+    runs: int = typer.Option(50, help="Benchmark runs"),
 ) -> None:
-    """Run latency/throughput benchmarks. (Stage B)"""
-    typer.echo("Benchmark command — to be implemented in Stage B.")
-    raise typer.Exit(code=0)
+    """Run latency benchmarks across coreset ratios."""
+    from visual_inspector.eval.latency import run_latency_benchmark
+
+    typer.echo("Running latency benchmarks...")
+    res = run_latency_benchmark(
+        config_path=config,
+        output_path=output,
+        n_warmup=warmup,
+        n_runs=runs,
+    )
+    for ratio_key, data in res["ratios"].items():
+        tot = data["total_ms"]
+        typer.echo(
+            f"[{ratio_key}] Median: {tot['median']:.1f}ms | P95: {tot['p95']:.1f}ms | Memory: {data['memory_bank_mb']}MB"
+        )
 
 
 @app.command()

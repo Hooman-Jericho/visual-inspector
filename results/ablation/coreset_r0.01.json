@@ -1,0 +1,66 @@
+{
+  "category": "bottle_r0.01",
+  "profile": "ablation",
+  "model_type": "patchcore",
+  "metrics": {
+    "image_auroc": 0.92,
+    "pixel_auroc": 0.8233,
+    "au_pro": 0.454,
+    "threshold": 5.7694,
+    "n_test": 30,
+    "n_good": 15,
+    "n_anomalous": 15,
+    "memory_bank_mb": 0.014,
+    "coreset_ratio": 0.01
+  },
+  "config": {
+    "seed": 42,
+    "device": "cpu",
+    "data": {
+      "root": "__synthetic__",
+      "category": "synthetic",
+      "image_size": 64,
+      "crop_size": 56,
+      "val_good_fraction": 0.1,
+      "num_workers": 0
+    },
+    "backbone": {
+      "name": "wide_resnet50_2",
+      "layers": [
+        "layer2",
+        "layer3"
+      ],
+      "pretrained": false
+    },
+    "patchcore": {
+      "d_target": 256,
+      "coreset_ratio": 0.01,
+      "projection_dim": 64,
+      "k_neighbors": 1,
+      "sigma_blur": 2.0,
+      "threshold_percentile": 99.0
+    },
+    "output": {
+      "artifacts_dir": "artifacts",
+      "results_dir": "results"
+    }
+  },
+  "config_hash": "9dabdf32c681",
+  "seed": 42,
+  "env": {
+    "python_version": "3.12.15",
+    "torch_version": "2.14.1+cpu",
+    "torchvision_version": "0.29.1+cpu",
+    "os": "Windows 11 (AMD64)",
+    "cpu_model": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+    "cpu_threads": 12,
+    "torch_num_threads": 6,
+    "device": "cpu",
+    "cuda_available": false,
+    "cuda_version": null,
+    "cuda_device_name": null,
+    "faiss_available": true,
+    "git_commit": "a17c5a6ac65df75bb4a8340c6f3c5b4dc93b816d"
+  },
+  "timestamp": "2026-10-19T09:08:12.155994+00:00"
+}

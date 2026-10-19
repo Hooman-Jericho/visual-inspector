@@ -1,0 +1,100 @@
+{
+  "benchmark": "inference_latency",
+  "ratios": {
+    "ratio_0.01": {
+      "n_runs": 50,
+      "n_warmup": 10,
+      "batch_size": 1,
+      "memory_bank_size": [
+        19,
+        256
+      ],
+      "backbone_ms": {
+        "median": 33.54,
+        "p95": 34.22
+      },
+      "knn_ms": {
+        "median": 0.13,
+        "p95": 0.14
+      },
+      "postprocess_ms": {
+        "median": 0.38,
+        "p95": 0.4
+      },
+      "total_ms": {
+        "median": 34.06,
+        "p95": 34.74
+      },
+      "memory_bank_mb": 0.019
+    },
+    "ratio_0.1": {
+      "n_runs": 50,
+      "n_warmup": 10,
+      "batch_size": 1,
+      "memory_bank_size": [
+        196,
+        256
+      ],
+      "backbone_ms": {
+        "median": 33.17,
+        "p95": 34.2
+      },
+      "knn_ms": {
+        "median": 0.16,
+        "p95": 0.18
+      },
+      "postprocess_ms": {
+        "median": 0.39,
+        "p95": 0.4
+      },
+      "total_ms": {
+        "median": 33.73,
+        "p95": 34.74
+      },
+      "memory_bank_mb": 0.191
+    },
+    "ratio_1.0": {
+      "n_runs": 50,
+      "n_warmup": 10,
+      "batch_size": 1,
+      "memory_bank_size": [
+        1960,
+        256
+      ],
+      "backbone_ms": {
+        "median": 32.65,
+        "p95": 33.93
+      },
+      "knn_ms": {
+        "median": 0.59,
+        "p95": 0.63
+      },
+      "postprocess_ms": {
+        "median": 0.4,
+        "p95": 0.41
+      },
+      "total_ms": {
+        "median": 33.63,
+        "p95": 34.81
+      },
+      "memory_bank_mb": 1.914
+    }
+  },
+  "env": {
+    "python_version": "3.12.15",
+    "torch_version": "2.14.1+cpu",
+    "torchvision_version": "0.29.1+cpu",
+    "os": "Windows 11 (AMD64)",
+    "cpu_model": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+    "cpu_threads": 12,
+    "torch_num_threads": 6,
+    "device": "cpu",
+    "cuda_available": false,
+    "cuda_version": null,
+    "cuda_device_name": null,
+    "faiss_available": true,
+    "git_commit": "a17c5a6ac65df75bb4a8340c6f3c5b4dc93b816d"
+  },
+  "config_hash": "1ee3b348f78d",
+  "timestamp": "2026-10-19T09:45:47.526120+00:00"
+}
