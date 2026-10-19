@@ -1,0 +1,28 @@
+# Smoke test configuration — tiny, fast, for CI / dev
+seed: 42
+device: cpu
+
+data:
+  root: __synthetic__
+  category: synthetic
+  image_size: 64
+  crop_size: 56
+  val_good_fraction: 0.10
+  num_workers: 0
+
+backbone:
+  name: wide_resnet50_2
+  layers: [layer2, layer3]
+  pretrained: false  # random weights for speed
+
+patchcore:
+  d_target: 256
+  coreset_ratio: 0.50
+  projection_dim: 64
+  k_neighbors: 1
+  sigma_blur: 2.0
+  threshold_percentile: 99.0
+
+output:
+  artifacts_dir: artifacts
+  results_dir: results

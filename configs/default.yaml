@@ -1,0 +1,28 @@
+# Default configuration for visual-inspector
+seed: 42
+device: auto  # auto | cpu | cuda | mps
+
+data:
+  root: data/mvtec_ad
+  category: bottle
+  image_size: 256
+  crop_size: 224
+  val_good_fraction: 0.10
+  num_workers: 4
+
+backbone:
+  name: wide_resnet50_2
+  layers: [layer2, layer3]
+  pretrained: true
+
+patchcore:
+  d_target: 1024
+  coreset_ratio: 0.10
+  projection_dim: 128
+  k_neighbors: 1
+  sigma_blur: 4.0
+  threshold_percentile: 99.0
+
+output:
+  artifacts_dir: artifacts
+  results_dir: results

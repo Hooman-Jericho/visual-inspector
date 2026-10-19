@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+data/
+artifacts/
+*.pt
+*.pth
+*.onnx
+.env
